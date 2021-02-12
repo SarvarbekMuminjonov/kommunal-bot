@@ -51,16 +51,16 @@ function getMainResponse(firstResponse, creditials) {
                     message: error
                 })
             } else {
-                if (body.search("Ошибка системы проверки баланса") > 0) {
-                    reject({
-                        ok: false,
-                        message: "NOT FOUND"
-                    })
-                } else if (body.search("table table-striped") > 0) {
+                if (body.search("table table-striped") > 0) {
                     resolve({
                         ok: true,
                         message: "SUCCESS",
                         body,
+                    })
+                } else if (body.search("Ошибка системы проверки баланса") > 0) {
+                    reject({
+                        ok: false,
+                        message: "NOT FOUND"
                     })
                 } else {
                     reject({
