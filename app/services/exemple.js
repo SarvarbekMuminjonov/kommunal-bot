@@ -17,5 +17,7 @@ let d1 = new Date()
 
 module.exports = function getUserData(creditials) {
   return requestUser(creditials)
-    .then(res => userDataParser(res.body))
+    .then((res) => {
+      userDataParser(res.body)
+    })
 }

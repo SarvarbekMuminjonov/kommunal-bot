@@ -1,6 +1,6 @@
 const request = require("request").defaults({ jar: true })
 
-module.exports = async function requestUser(creditials) {
+module.exports = async function requestUser(creditials) { 
     const { personal_account, service_id, region_id, sub_region_id } = creditials
     if (!personal_account || !service_id || !region_id || !sub_region_id)
         throw new Error("Cannot be empty")
