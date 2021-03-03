@@ -1,13 +1,29 @@
 const {Markup}=require('telegraf')
-const servicesButton = Markup.inlineKeyboard([
-    [
-        Markup.button.callback('Elektr','0'),
-        Markup.button.callback('Gaz','1')
-    ],
-    [
-        Markup.button.callback('Sovuq Suv','2'),
-        Markup.button.callback('Issiq Suv','3')
-    ]
-])
+
+let ru =[
+    'Электр',
+    'Газ',
+    'Холодная вода',
+    'Горячая вода'
+]
+let uz=[
+    'Elektr',
+    'Gaz',
+    'Sovuq Suv',
+    'Issiq Suv'
+]
+function servicesButton(lang){
+    if(lang == 'ru')uz=ru
+    return Markup.inlineKeyboard([
+        [
+            Markup.button.callback(uz[0],'3'),
+            Markup.button.callback(uz[1],'166')
+        ],
+        [
+            Markup.button.callback(uz[2],'119'),
+            Markup.button.callback(uz[3],'127')
+        ]
+    ])
+}
 
 module.exports = servicesButton

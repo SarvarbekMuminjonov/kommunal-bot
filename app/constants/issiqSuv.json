@@ -1,0 +1,150 @@
+[
+  {
+    "Id": 1,
+    "Code": "1",
+    "Name": "\u0433.\u0422\u0430\u0448\u043a\u0435\u043d\u0442",
+    "Status": true,
+    "AreaName": {
+      "uz": "Toshkent shahri",
+      "ru": "\u0433.\u0422\u0430\u0448\u043a\u0435\u043d\u0442",
+      "en": "Tashkent city"
+    },
+    "Children": {
+      "Title": "\u0420\u0430\u0439\u043e\u043d",
+      "Area": [
+        {
+          "Id": 12,
+          "Code": "101",
+          "Name": "\u041c\u0438\u0440\u043e\u0431\u043e\u0434\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Mirobod tumani",
+            "ru": "\u041c\u0438\u0440\u043e\u0431\u043e\u0434\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Mirobod District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 13,
+          "Code": "102",
+          "Name": "\u041c. \u0423\u043b\u0443\u0433\u0431\u0435\u043a\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Mirzo Ulug'bek tumani",
+            "ru": "\u041c. \u0423\u043b\u0443\u0433\u0431\u0435\u043a\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Mirzo ulugbek District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 14,
+          "Code": "103",
+          "Name": "\u042f\u043a\u043a\u0430\u0441\u0430\u0440\u0430\u0439\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Yakkasaroy tumani",
+            "ru": "\u042f\u043a\u043a\u0430\u0441\u0430\u0440\u0430\u0439\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Yakkasaroy District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 15,
+          "Code": "104",
+          "Name": "\u0410\u043b\u043c\u0430\u0437\u0430\u0440\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Olmazor tumani",
+            "ru": "\u0410\u043b\u043c\u0430\u0437\u0430\u0440\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Olmazor District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 16,
+          "Code": "105",
+          "Name": "\u042e\u043d\u0443\u0441\u0430\u0431\u0430\u0434\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Yunusobod tumani",
+            "ru": "\u042e\u043d\u0443\u0441\u0430\u0431\u0430\u0434\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Yunusobod District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 17,
+          "Code": "106",
+          "Name": "\u0427\u0438\u043b\u043e\u043d\u0437\u0430\u0440\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Chilonzor tumani",
+            "ru": "\u0427\u0438\u043b\u043e\u043d\u0437\u0430\u0440\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Chilonzor District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 18,
+          "Code": "107",
+          "Name": "\u0423\u0447\u0442\u0435\u043f\u0438\u043d\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Uchtepa tumani",
+            "ru": "\u0423\u0447\u0442\u0435\u043f\u0438\u043d\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Uchtepa District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 19,
+          "Code": "108",
+          "Name": "\u0421\u0435\u0440\u0433\u0435\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Sergeli tumani",
+            "ru": "\u0421\u0435\u0440\u0433\u0435\u043b\u0438\u0439\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Sergeli District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 20,
+          "Code": "109",
+          "Name": "\u042f\u0448\u043d\u0430\u0431\u0430\u0434\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Yashnobod tumani",
+            "ru": "\u042f\u0448\u043d\u0430\u0431\u0430\u0434\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Yashnabod District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 21,
+          "Code": "110",
+          "Name": "\u0428\u0430\u0439\u0445\u0430\u043d\u0442\u0430\u0443\u0440\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Shayxontohur tumani",
+            "ru": "\u0428\u0430\u0439\u0445\u0430\u043d\u0442\u0430\u0443\u0440\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Shayxontoxur District"
+          },
+          "Children": {}
+        },
+        {
+          "Id": 22,
+          "Code": "111",
+          "Name": "\u0411\u0435\u043a\u0442\u0435\u043c\u0438\u0440\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+          "Status": true,
+          "AreaName": {
+            "uz": "Bektemir tumani",
+            "ru": "\u0411\u0435\u043a\u0442\u0435\u043c\u0438\u0440\u0441\u043a\u0438\u0439 \u0440\u0430\u0439\u043e\u043d",
+            "en": "Bektemir District"
+          },
+          "Children": {}
+        }
+      ]
+    }
+  }
+]

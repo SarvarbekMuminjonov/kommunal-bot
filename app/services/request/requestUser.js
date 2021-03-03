@@ -36,7 +36,7 @@ function getMainResponse(firstResponse, creditials) {
         request({
             method: "POST",
             host: "ek.uz",
-            url: "http://ek.uz/ru/cabinet/payment-public/balance?id=3",
+            url: `http://ek.uz/${creditials.lang}/cabinet/payment-public/balance?id=${creditials.id}`,
             form: {
                 _csrf: token,
                 'Balance[personal_account]': creditials.personal_account,

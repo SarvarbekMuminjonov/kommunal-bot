@@ -7,7 +7,7 @@ const requestUser = require("./request/requestUser");
 //   region_id: 27,
 //   sub_region_id: 237
 // }
-let d1 = new Date()
+// let d1 = new Date()
 // getUserData(creditials).then(data => {
 //   let d2 = new Date()
 //   let time = d2 - d1
@@ -15,9 +15,8 @@ let d1 = new Date()
 //   console.log(data);
 // })
 
+
 module.exports = function getUserData(creditials) {
   return requestUser(creditials)
-    .then((res) => {
-      userDataParser(res.body)
-    })
+    .then((res) =>userDataParser(res.body))
 }

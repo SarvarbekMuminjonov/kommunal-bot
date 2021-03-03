@@ -8,8 +8,8 @@ const stage = new Stage(scenes);
 bot
 	.use(session())
 	.use(stage.middleware())
-	.start((ctx) => ctx.scene.enter("services"))
-	.on("text", (ctx) => ctx.scene.enter("region"))
+	.start((ctx) => ctx.scene.enter("lang"))
+	.on("text", (ctx) => ctx.scene.enter("lang"))
 	.launch()
 	.then((res) => {
 		console.log("Bot started");

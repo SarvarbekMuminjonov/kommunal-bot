@@ -1,14 +1,20 @@
 const { Scenes } = require("telegraf");
 const {buttonGenerator , getArray} = require("../utils/keyboards/buttuonGenerator");
 
+let ru = "Bыберите свой район или город"
+let uz = "Tuman yoki shahringizni tanlang"
+
+
 const districtScene = new Scenes.BaseScene("district");
 
 districtScene.enter((ctx) => {
 	const array = getArray(ctx.session.serviceId)
 	ctx.deleteMessage();
-	ctx.reply("Tuman yoki shahringizni tanlang", {
+	if(ctx.session.lang == 'ru')uz=ru
+	ctx.reply(uz, {
 		...buttonGenerator(
-			array[ctx.session.regIndex].Children.Area
+			array[ctx.session.regIndex].Children.Area,
+			ctx.session.lang
 		),
 	});
 });
@@ -19,7 +25,6 @@ districtScene.action(/.+/, (ctx) => {
 		ctx.answerCbQuery("ok");
 	} else {
 		ctx.session.districtNumber = ctx.match[0].split('-')[0];
-		console.log(ctx.session.districtNumber);
 		ctx.answerCbQuery("ok");
 		return ctx.scene.enter("number");
 	}

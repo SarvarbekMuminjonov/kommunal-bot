@@ -1,39 +1,20 @@
 const { Scenes, Markup } = require("telegraf");
 const numberScene = new Scenes.BaseScene("number");
 const getUserData = require("../services/exemple");
-let personalNumberKeyboard = [
-	[
-		Markup.button.callback("1", "1"),
-		Markup.button.callback("2", "2"),
-		Markup.button.callback("3", "3"),
-	],
-	[
-		Markup.button.callback("4", "4"),
-		Markup.button.callback("5", "5"),
-		Markup.button.callback("6", "6"),
-	],
-	[
-		Markup.button.callback("7", "7"),
-		Markup.button.callback("8", "8"),
-		Markup.button.callback("9", "9"),
-	],
-	[
-		Markup.button.callback("Orqaga", "orqaga"),
-		Markup.button.callback("0", "0"),
-		Markup.button.callback("Delete", "delete"),
-	],
-	[Markup.button.callback("Natija", "natija")],
-];
+const personalNumberKeyboard = require('../core/keyboards/numberKeyboard')
+let uz = "<b>Hisob raqamingizni kiriting</b>"
+let ru = "Введите номер вашего счета"
+
 
 // numberScene.use(session())
 let editing = "";
 numberScene.enter((ctx) => {
 	ctx.deleteMessage();
 	editing=''
-	// if(ctx.session.districtNumber)ctx.session.districtNumber=0
-	return ctx.reply("<b>Hisob raqamingizni kiriting</b>", {
+	if(ctx.session.lang == 'ru')uz=ru
+	return ctx.reply(uz, {
 		parse_mode: "HTML",
-		...Markup.inlineKeyboard(personalNumberKeyboard),
+		...Markup.inlineKeyboard(personalNumberKeyboard(ctx.session.lang)),
 	});
 });
 
@@ -48,15 +29,19 @@ numberScene.action(/.+/, (ctx) => {
 	if (ctx.match[0] == "natija") {
 		ctx.session.personalNumber = editing;
 		const creditials = {
+			lang:ctx.session.lang,
+			id:ctx.session.serviceId,
 			personal_account: (ctx.session.personalNumber),
 			service_id: 3,
 			region_id: Number.parseInt(ctx.session.regionNumber),
 			sub_region_id: Number.parseInt(ctx.session.districtNumber),
 		};
 		let resultMsg = ``;
-		console.log(creditials);
-		getUserData(creditials).then((res) => {
-			console.log(res)
+		console.log(creditials)
+		
+		getUserData(creditials)
+		.then((res) => {
+			
 			res.forEach((val) => {
 				resultMsg += `${val.name} : ${val.value}\n`
 			})
@@ -74,7 +59,7 @@ numberScene.action(/.+/, (ctx) => {
 	ctx.editMessageReplyMarkup({
 		inline_keyboard: [
 			[Markup.button.callback(`${editing}`, "edit")],
-			...personalNumberKeyboard,
+			...personalNumberKeyboard(ctx.session.lang),
 		],
 	});
 });

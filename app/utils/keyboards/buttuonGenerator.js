@@ -1,8 +1,8 @@
-const { Markup } = require("telegraf");
+const { Markup, Context } = require("telegraf");
 //const json = require("../../constants/regionsElektr.json");
 //let arr = json;
 
- function buttonGenerator(array) {
+ function buttonGenerator(array,lang) {
 	let btnarr = [];
 	
 
@@ -10,7 +10,7 @@ const { Markup } = require("telegraf");
 	for (let i = 0; i < array.length; i++) {
 		btnarr.push(
 			Markup.button.callback(
-				array[i].Name,
+				array[i].AreaName[lang],
 				array[i].Code+"-"+i
 			)
 		);
@@ -20,16 +20,22 @@ const { Markup } = require("telegraf");
 		}
 		if (array.length % 2 == 1 && i == array.length - 1) btn.push(btnarr);
 	}
-	btn.push([Markup.button.callback("Ortga qaytish", "orqaga")]);
+	if(lang =='ru')btn.push([Markup.button.callback('Назад','orqaga')])
+	else btn.push([Markup.button.callback("Ortga qaytish", "orqaga")]);
 	return Markup.inlineKeyboard(btn);
 };
 
 function getArray(serviceId){
 	let array=[]
 	switch(serviceId){
-		case '0': array=require('../../constants/regionsElektr.json')
+		case '3': array=require('../../constants/regionsElektr.json')
 		break
-		case '1':array = require('../../constants/gazData.json')
+		case '166':array = require('../../constants/gazData.json')
+		break
+		case '127':array = require('../../constants/issiqSuv.json')
+		break
+		case '119':array = require('../../constants/sovuqSuv.json')
+
 	}
 	return array
 }

@@ -2,6 +2,7 @@ const cheerio = require('cheerio')
 
 module.exports = function userDataParser(html) {
   const $ = cheerio.load(html)
+  
   const dataTable = []
 
   $('table.table.table-striped tr').each((idx, tr) => {
@@ -11,6 +12,6 @@ module.exports = function userDataParser(html) {
       value: tds.eq(1).text().trim()
     })
   })
-
+  // console.log(dataTable)
   return dataTable
 }
