@@ -11,9 +11,9 @@ let greetingRu = `Привет и добро пожаловать в
 
 
 servicesScene.enter((ctx) => {
-    ctx.deleteMessage()
+    // ctx.deleteMessage()
     if(ctx.session.lang == 'ru')greeting=greetingRu
-    return ctx.reply(greeting, servicesButton(ctx.session.lang))
+    return ctx.editMessageText(greeting, servicesButton(ctx.session.lang))
 })
 
 servicesScene.action(/.+/, (ctx) => {
