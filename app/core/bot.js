@@ -9,6 +9,9 @@ const bot = new Telegraf(TOKEN);
 const scenes = require("../scenes");
 const stage = new Stage(scenes);
 
+bot.telegram.setWebhook(`${URL}/bot${TOKEN}`).then((res) => {
+  bot.telegram.sendMessage(DEV_ID, "bot started");
+});
 app.use(bot.webhookCallback(`/bot${TOKEN}`));
 
 bot
@@ -21,9 +24,7 @@ bot
 // 	console.log("Bot started")
 //bot.telegram.sendMessage(DEV_ID, "bot started")
 // })
-bot.telegram.setWebhook(`${URL}/bot${TOKEN}`).then((res) => {
-  bot.telegram.sendMessage(DEV_ID, "bot started");
-});
+
 
 app.listen(PORT || 8000, () => {
   console.log(`Server running on port ${PORT}`);
