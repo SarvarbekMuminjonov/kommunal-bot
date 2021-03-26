@@ -1,6 +1,6 @@
 const { Scenes } = require("telegraf")
 const {buttonGenerator , getArray} = require("../utils/keyboards/buttuonGenerator")
-
+let lang=''
 let ru = "Bыберите свой район или город"
 let uz = "Tuman yoki shahringizni tanlang"
 
@@ -10,8 +10,9 @@ const districtScene = new Scenes.BaseScene("district")
 .enter((ctx) => {
 	const array = getArray(ctx.session.serviceId)
 	// ctx.deleteMessage()
-	if(ctx.session.lang == 'ru')uz=ru
-	ctx.editMessageText(uz, {
+	if(ctx.session.lang == 'ru')lang=ru
+	else lang=uz
+	ctx.editMessageText(lang, {
 		...buttonGenerator(
 			array[ctx.session.regIndex].Children.Area,
 			ctx.session.lang

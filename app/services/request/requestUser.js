@@ -5,15 +5,15 @@ module.exports = async function requestUser(creditials) {
     if (!personal_account || !service_id || !region_id || !sub_region_id)
         throw new Error("Cannot be empty")
 
-    const firstResponse = await getFirstResponse()
+    const firstResponse = await getFirstResponse(creditials)
     return await getMainResponse(firstResponse, creditials)
 }
 
-function getFirstResponse() {
+function getFirstResponse(creditials) {
     return new Promise((resolve, reject) => {
         request({
             method: "GET",
-            url: "http://ek.uz/ru/cabinet/payment-public/balance?id=3"
+            url: `http://ek.uz/${creditials.lang}/cabinet/payment-public/balance?id=${creditials.id}`
         }, (error, response, body) => {
             if (error) {
                 reject({

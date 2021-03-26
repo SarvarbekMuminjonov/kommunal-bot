@@ -2,8 +2,10 @@ const { Scenes, Markup } = require("telegraf")
 
 const getUserData = require("../services/exemple")
 const personalNumberKeyboard = require('../core/keyboards/numberKeyboard')
+let lang =''
 let uz = "<b>Hisob raqamingizni kiriting</b>"
 let ru = "Введите номер вашего счета"
+let error=''
 let errorUz=`Xato! Nimadur xato kiritildi 
 boshidan boshlash uchun /start ni bosing.`
 let errorRu= `Oшибкa ! Что-то пошло не так
@@ -17,10 +19,14 @@ const numberScene = new Scenes.BaseScene("number")
 	// ctx.deleteMessage()
 	editing=''
 	if(ctx.session.lang == 'ru'){
-		uz=ru
-		errorUz= errorRu
-	}	
-	return ctx.editMessageText(uz, {
+		lang=ru
+		error= errorRu
+	}
+	else {
+		lang=uz
+		error=errorUz
+	}
+	return ctx.editMessageText(lang, {
 		parse_mode: "HTML",
 		...Markup.inlineKeyboard(personalNumberKeyboard(ctx.session.lang)),
 	})
