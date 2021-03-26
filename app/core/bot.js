@@ -25,6 +25,6 @@ bot
     bot.telegram.sendMessage(DEV_ID, "bot started")
 })
 
-app.listen(PORT, () => {
+app.listen(PORT || 8000, () => {
   console.log(`Server running on port ${PORT}`)
 })
