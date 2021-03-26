@@ -4,6 +4,7 @@ const { Stage } = Scenes
 const express = require("express")
 const app = express()
 console.log("TOKEN", TOKEN);
+console.log("port",PORT)
 const bot = new Telegraf(TOKEN)
 const scenes = require("../scenes")
 const stage = new Stage(scenes)
