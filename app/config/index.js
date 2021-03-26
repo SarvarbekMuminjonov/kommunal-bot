@@ -10,7 +10,7 @@ const URL = process.env.URL
 const PORT = process.env.PORT
 
 module.exports = {
-	
+	DEV_ID,
 	TOKEN,
 	PORT,
 	URL
