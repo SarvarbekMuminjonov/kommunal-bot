@@ -1,5 +1,5 @@
-const userDataParser = require("./parser/userDataParser")
-const requestUser = require("./request/requestUser")
+const userDataParser = require("./parser/userDataParser");
+const requestUser = require("./request/requestUser");
 // const creditials = {
 //   personal_account: 2276071,
 //   service_id: 3,
@@ -14,9 +14,9 @@ const requestUser = require("./request/requestUser")
 //   console.log(data);
 // })
 
-
 module.exports = function getUserData(creditials) {
-  return requestUser(creditials)
-    .then((res) =>userDataParser(res.body))
-    
-}
+	console.log("creditials", creditials);
+	return requestUser(creditials).then((res) => {
+		return userDataParser(res.body);
+	});
+};
