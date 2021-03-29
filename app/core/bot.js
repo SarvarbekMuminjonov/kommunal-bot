@@ -22,7 +22,7 @@ bot
 	.launch()
 	.then((res) => {
 		console.log("Bot started");
-		bot.telegram.sendMessage(DEV_ID, "bot started");
+		// bot.telegram.sendMessage(DEV_ID, "bot started");
 	});
 
 // app.listen(PORT, () => {
