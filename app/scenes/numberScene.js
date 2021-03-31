@@ -2,6 +2,7 @@ const { Scenes, Markup } = require("telegraf");
 
 const getUserData = require("../services/exemple");
 const personalNumberKeyboard = require("../core/keyboards/numberKeyboard");
+
 let lang = "";
 let uz = "<b>Hisob raqamingizni kiriting</b>";
 let ru = "Введите номер вашего счета";
@@ -30,6 +31,7 @@ const numberScene = new Scenes.BaseScene("number")
 		});
 	})
 	.hears(/\d+/, (ctx) => {
+		console.log('hears')
 		ctx.session.personalNumber = ctx.match[0];
 		return fetch(ctx);
 	})
@@ -40,7 +42,7 @@ const numberScene = new Scenes.BaseScene("number")
 		if (ctx.match[0] == "delete") editing = editing.slice(0, -1);
 
 		if (ctx.match[0] == "orqaga") {
-			ctx.scene.enter("district");
+			return ctx.scene.enter("district");
 		}
 
 		if (ctx.match[0] == "natija") {
@@ -61,7 +63,8 @@ const numberScene = new Scenes.BaseScene("number")
 			],
 		});
 	})
-	.use((ctx) => {});
+	.use((ctx) => {})
+	.leave((ctx)=>{})
 
 function fetch(ctx) {
 	return getUserData({
@@ -72,13 +75,16 @@ function fetch(ctx) {
 		region_id: ctx.session.regionNumber,
 		sub_region_id: ctx.session.districtNumber,
 	})
-		.then((res) =>
+		.then((res) => {
 			ctx.reply(res.map((val) => `${val.name}: ${val.value}`).join("\n"))
-		)
+			return ctx.scene.leave('number') 
+		})
 		.catch((err) => {
 			console.log(err);
-			return ctx.reply(errorUz);
-		});
+			// ctx.session.leave('number')
+			ctx.reply(error)
+			return ctx.scene.leave('number')
+		})
 }
 
 module.exports = numberScene;

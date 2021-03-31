@@ -8,8 +8,8 @@ const bot = new Telegraf(TOKEN);
 const scenes = require("../scenes");
 const stage = new Stage(scenes);
 
-bot.telegram.setWebhook(`${URL}/bot${TOKEN}`)
-app.use(bot.webhookCallback(`/bot${TOKEN}`))
+// bot.telegram.setWebhook(`${URL}/bot${TOKEN}`)
+// app.use(bot.webhookCallback(`/bot${TOKEN}`))
 
 bot
 	.use(session())
@@ -19,12 +19,12 @@ bot
 		console.log(ctx.message.text);
 		return ctx.scene.enter("lang");
 	})
-	// .launch()
-	// .then((res) => {
-	// 	console.log("Bot started");
-	// 	// bot.telegram.sendMessage(DEV_ID, "bot started");
-	// });
+	.launch()
+	.then((res) => {
+		console.log("Bot started");
+		// bot.telegram.sendMessage(DEV_ID, "bot started");
+	});
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`)
+// })
