@@ -1,5 +1,5 @@
 const { Scenes, Markup } = require("telegraf");
-
+const {User,Account} = require('../database/controllers/main')
 const getUserData = require("../services/exemple");
 const personalNumberKeyboard = require("../core/keyboards/numberKeyboard");
 
@@ -66,7 +66,7 @@ const numberScene = new Scenes.BaseScene("number")
 	.use((ctx) => {})
 	.leave((ctx)=>{})
 
-function fetch(ctx) {
+async function fetch(ctx) {
 	return getUserData({
 		lang: ctx.session.lang,
 		id: ctx.session.serviceId,
@@ -76,7 +76,20 @@ function fetch(ctx) {
 		sub_region_id: ctx.session.districtNumber,
 	})
 		.then((res) => {
-			ctx.reply(res.map((val) => `${val.name}: ${val.value}`).join("\n"))
+			 
+			const data = res.map((val) => `${val.name}: ${val.value}`).join("\n")
+			if(!Account.getOne(ctx.session.personalNumber)){
+				Account.create(
+					ctx.session.personalNumber,
+					data,
+					ctx.session.serviceId,
+					ctx.session.regionNumber,
+					ctx.session.districtNumber,
+					ctx.session.user_id
+				)
+			}
+			
+			ctx.reply(data)
 			return ctx.scene.leave('number') 
 		})
 		.catch((err) => {
