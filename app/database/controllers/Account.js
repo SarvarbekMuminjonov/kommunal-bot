@@ -14,16 +14,13 @@ function update(id,{data,serviceId,regionId,subregionId,userId}){
     .catch(e=>console.log(e))
 }
 function getAll(userId){
-    Account.findAll({
+    return Account.findAll({
         where:userId
     })
-    .then(res=>{
-        console.log(res)
-        return res
-    })
+    
 }
 function getOne(id){
-    return Account.findByPk(id)
+    return Account.findAll({id})
 }
 
 module.exports = {

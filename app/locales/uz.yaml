@@ -1,0 +1,14 @@
+greeting: "Assalomu Alaykum Kommunal botga
+Xush kelibsiz!.O'zingiz tekshirmoqchi
+bo'lgan xizmat turini tanlang."
+region: "Viloyatingizni tanlang"
+subregion: "Tuman yoki shahringizni tanlang"
+personalNumber : "<b>Hisob raqamingizni kiriting</b>"
+error : " Xato! Nimadur xato kiritildi 
+boshidan boshlash uchun /start ni bosing."
+newAccount : "Hisob qo'shish"
+notFound : "Sizda hozircha hech qanday hisob mavjud emas"
+exit : "Orqaga"
+result : "Natija"
+delete : "O'chirish"
+lang : "O'zbek"

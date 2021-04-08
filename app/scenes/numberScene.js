@@ -3,31 +3,13 @@ const {User,Account} = require('../database/controllers/main')
 const getUserData = require("../services/exemple");
 const personalNumberKeyboard = require("../core/keyboards/numberKeyboard");
 
-let lang = "";
-let uz = "<b>Hisob raqamingizni kiriting</b>";
-let ru = "Введите номер вашего счета";
-let error = "";
-let errorUz = `Xato! Nimadur xato kiritildi 
-boshidan boshlash uchun /start ni bosing.`;
-let errorRu = `Oшибкa ! Что-то пошло не так
-Нажмите /start , чтобы начать заново.
-`;
 
-let editing = "";
 const numberScene = new Scenes.BaseScene("number")
 	.enter((ctx) => {
-		// ctx.deleteMessage()
-		editing = "";
-		if (ctx.session.lang == "ru") {
-			lang = ru;
-			error = errorRu;
-		} else {
-			lang = uz;
-			error = errorUz;
-		}
-		return ctx.editMessageText(lang, {
+		
+		return ctx.editMessageText(ctx.i18n.t('personalNumber'), {
 			parse_mode: "HTML",
-			...Markup.inlineKeyboard(personalNumberKeyboard(ctx.session.lang)),
+			...Markup.inlineKeyboard(personalNumberKeyboard(ctx)),
 		});
 	})
 	.hears(/\d+/, (ctx) => {
@@ -59,7 +41,7 @@ const numberScene = new Scenes.BaseScene("number")
 		return ctx.editMessageReplyMarkup({
 			inline_keyboard: [
 				[Markup.button.callback(`${editing}`, "edit")],
-				...personalNumberKeyboard(ctx.session.lang),
+				...personalNumberKeyboard(ctx),
 			],
 		});
 	})
@@ -76,7 +58,6 @@ async function fetch(ctx) {
 		sub_region_id: ctx.session.districtNumber,
 	})
 		.then((res) => {
-			 
 			const data = res.map((val) => `${val.name}: ${val.value}`).join("\n")
 			if(!Account.getOne(ctx.session.personalNumber)){
 				Account.create(
@@ -88,14 +69,13 @@ async function fetch(ctx) {
 					ctx.session.user_id
 				)
 			}
-			
 			ctx.reply(data)
 			return ctx.scene.leave('number') 
 		})
 		.catch((err) => {
 			console.log(err);
 			// ctx.session.leave('number')
-			ctx.reply(error)
+			ctx.reply(ctx.i18n.t('error'))
 			return ctx.scene.leave('number')
 		})
 }

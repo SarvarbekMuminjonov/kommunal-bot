@@ -1,24 +1,7 @@
 const {Markup} = require('telegraf')
 
-let backUz='Orqaga',back=''
-let backRu = 'Назад'
-let resultUz ='Natija',result=''
-let resulRu ='Результат'
-let deleteUz = 'O\'chirish',remove=''
-let deleteRu = 'Удалить'
+function personalNumberKeyboard(ctx){
 
-
-function personalNumberKeyboard(lang){
-if(lang == 'ru'){
-    back=backRu
-    result=resulRu
-    remove=deleteRu
-}
-else {
-	back=backUz
-	result=resultUz
-	remove=deleteUz
-}
 return [
 	[
 		Markup.button.callback("1", "1"),
@@ -36,11 +19,11 @@ return [
 		Markup.button.callback("9", "9"),
 	],
 	[
-		Markup.button.callback(back, "orqaga"),
+		Markup.button.callback(ctx.i18n.t('exit'), "orqaga"),
 		Markup.button.callback("0", "0"),
-		Markup.button.callback(remove, "delete"),
+		Markup.button.callback(ctx.i18n.t('delete'), "delete"),
 	],
-	[Markup.button.callback(result, "natija")],
+	[Markup.button.callback(ctx.i18n.result, "natija")],
 ]
 }
 

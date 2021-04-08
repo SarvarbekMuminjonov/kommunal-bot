@@ -1,22 +1,10 @@
 const { Scenes } = require('telegraf')
 const servicesButton = require('../core/keyboards/sevicesButton')
 const servicesScene = new Scenes.BaseScene('services')
-let greetingUz = `Assalomu Alaykum Kommunal botga
-Xush kelibsiz!.O\'zingiz tekshirmoqchi
-bo\'gan xizmat turini tanlang.`
-let greeting=''
-let greetingRu = `Привет и добро пожаловать в 
-коммунальный бот.Выберите услугу,
-которую хотите проверить
-`
 
 
 servicesScene.enter((ctx) => {
-    // ctx.deleteMessage()
-    if(ctx.session.lang == 'ru')greeting=greetingRu
-    else greeting=greetingUz
-    console.log(ctx.session.lang)
-    return ctx.editMessageText(greeting, servicesButton(ctx.session.lang))
+    return ctx.editMessageText(ctx.i18n.t('greeting'), servicesButton(ctx.i18n.locale()))
 })
 
 servicesScene.action(/.+/, (ctx) => {

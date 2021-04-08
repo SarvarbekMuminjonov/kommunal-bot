@@ -1,8 +1,6 @@
-const { Markup, Context } = require("telegraf");
-//const json = require("../../constants/regionsElektr.json");
-//let arr = json;
+const { Markup } = require("telegraf");
 
- function buttonGenerator(array,lang) {
+ function buttonGenerator(array,lang,str) {
 	let btnarr = [];
 	
 
@@ -20,8 +18,7 @@ const { Markup, Context } = require("telegraf");
 		}
 		if (array.length % 2 == 1 && i == array.length - 1) btn.push(btnarr);
 	}
-	if(lang =='ru')btn.push([Markup.button.callback('Назад','orqaga')])
-	else btn.push([Markup.button.callback("Ortga qaytish", "orqaga")]);
+	btn.push([Markup.button.callback(str, "orqaga")])
 	return Markup.inlineKeyboard(btn);
 };
 

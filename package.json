@@ -19,7 +19,8 @@
     "pg-hstore": "^2.3.3",
     "request": "^2.88.2",
     "sequelize": "^6.6.2",
-    "telegraf": "^4.0.3"
+    "telegraf": "^4.0.3",
+    "telegraf-i18n": "^6.6.0"
   },
   "repository": {
     "type": "git",

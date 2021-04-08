@@ -1,37 +1,28 @@
-const { Markup, Scenes } = require("telegraf");
+const { Markup, Scenes } = require("telegraf")
 const {
 	buttonGenerator,
 	getArray,
-} = require("../utils/keyboards/buttuonGenerator");
-let uz = "Viloyatingizni tanlang";
-let ru = "Выберите свой регион";
-let lang = "";
+} = require("../utils/keyboards/buttuonGenerator")
 
-const regionScene = new Scenes.BaseScene("region");
+
+const regionScene = new Scenes.BaseScene("region")
 
 regionScene.enter((ctx) => {
-	const array = getArray(ctx.session.serviceId);
-	// ctx.deleteMessage()
-	if (ctx.session.lang == "ru") lang = ru;
-	else lang = uz;
-	ctx.editMessageText(lang, {
-		...buttonGenerator(array, ctx.session.lang),
-	});
-});
+	const array = getArray(ctx.session.serviceId)
+	console.log('reg',ctx.i18n.locale())
+	ctx.editMessageText(ctx.i18n.t('region'), {
+		...buttonGenerator(array, ctx.session.lang,ctx.i18n.t('exit')),
+	})
+})
 
 regionScene.action(/.+/, (ctx) => {
-	ctx.session.regionNumber = ctx.match[0].split("-")[0];
-	ctx.session.regIndex = ctx.match[0].split("-")[1];
+	ctx.session.regionNumber = ctx.match[0].split("-")[0]
+	ctx.session.regIndex = ctx.match[0].split("-")[1]
 	if (ctx.match[0] == "orqaga") {
-		//ctx.deleteMessage()
-		return ctx.scene.enter("services");
+		return ctx.scene.enter("services")
 	}
+	ctx.answerCbQuery("ok")
+	return ctx.scene.enter("district")
+})
 
-	//ctx.session.regIndex = Number.parseInt(ctx.match.input.slice(3))
-	//console.log(ctx.session.regIndex)
-	//console.log(ctx.session.regionNumber)
-	ctx.answerCbQuery("ok");
-	return ctx.scene.enter("district");
-});
-
-module.exports = regionScene;
+module.exports = regionScene

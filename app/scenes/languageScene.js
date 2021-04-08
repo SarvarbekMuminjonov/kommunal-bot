@@ -1,8 +1,9 @@
-const {Scenes, Markup}=require('telegraf')
+const {Scenes, Markup,}=require('telegraf')
 
-const chooseText = `Assalomu alaykum tilni tanlang.
+const chooseText = `Assalomu alaykum tilni 
+tanlang.
 ---------
-Выберите язык.`
+Привет Выберите язык.`
 const languageScene = new Scenes.BaseScene('lang')
 
 languageScene.enter((ctx)=>{
@@ -17,6 +18,8 @@ languageScene.enter((ctx)=>{
 
 languageScene.action(/.+/,ctx=>{
     ctx.session.lang = ctx.match[0]
+    ctx.i18n.locale(ctx.session.lang)
+    console.log(ctx.i18n.locale())
     return ctx.scene.enter('services')
 })
 

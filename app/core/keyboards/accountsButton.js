@@ -1,26 +1,34 @@
 const { Markup } = require('telegraf')
-const { Account } = require('../../database/controllers/main')
 
-function getAccountsKeyboard(accounts) {
-  console.log('get',accounts)
-  let btnarr = [];
+
+function getAccountsKeyboard(accounts,str) {
+
+	let btnarr = [];
 	let btn = [];
 	for (let i = 0; i < accounts.length; i++) {
 		btnarr.push(
 			Markup.button.callback(
-				accounts[i].data.split(/\n/)[0],
+				accounts[i].data.split(/\n/)[0].slice(7) + ` : ${accounts[i].id}`,
 				accounts[i].id
 			)
 		);
 		if ((i + 1) % 2 == 0) {
-			btn.push(btnarr);
+			btn.push(btnarr)
+			btn.push(Markup.button.callback(str, 'new'))
 			btnarr = [];
 		}
-		if (accounts.length % 2 == 1 && i == accounts.length - 1) btn.push(btnarr);
+		if (accounts.length % 2 == 1 && i == accounts.length - 1) {
+			btnarr.push(Markup.button.callback(str, 'new'))
+			btn.push(btnarr)
+		}
 	}
+	//btn.push(Markup.button.callback('Akkount qo\'shish','new'))
 	// if(lang =='ru')btn.push([Markup.button.callback('Назад','orqaga')])
 	// else btn.push([Markup.button.callback("Ortga qaytish", "orqaga")]);
-	return Markup.inlineKeyboard(btn);
+	return {
+		'data':JSON.parse(JSON.stringify(accounts[0].data)),
+		'keyboard':Markup.inlineKeyboard(btn)
+	}
 }
 
 module.exports = getAccountsKeyboard
