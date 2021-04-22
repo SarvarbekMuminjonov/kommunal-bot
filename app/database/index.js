@@ -10,10 +10,8 @@ async function start(){
     try {
        await sequelize.authenticate()
        await sequelize.sync()
-    //    User.create(1)
-    
+        // await swsequelize.drop()
        console.log('connected')
-       
     } catch (error) {
         console.log(error)
     }

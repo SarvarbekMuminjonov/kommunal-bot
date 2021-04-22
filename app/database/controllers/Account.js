@@ -6,8 +6,8 @@ function create(id,data,serviceId,regionId,subregionId,userId){
     .then((res)=>console.log('Account created',res))
     .catch(e=>console.log(e))
 }
-function update(id,{data,serviceId,regionId,subregionId,userId}){
-    Account.update({data,serviceId,regionId,subregionId,userId},
+function update(id,{data}){
+    Account.update({data},
         {where:id}
     )
     .then((res)=>console.log('Account created'))

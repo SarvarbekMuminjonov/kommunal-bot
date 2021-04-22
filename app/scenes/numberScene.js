@@ -1,12 +1,13 @@
 const { Scenes, Markup } = require("telegraf");
-const {User,Account} = require('../database/controllers/main')
+const { User, Account } = require('../database/controllers/main')
 const getUserData = require("../services/exemple");
 const personalNumberKeyboard = require("../core/keyboards/numberKeyboard");
-
+let editing
 
 const numberScene = new Scenes.BaseScene("number")
+
 	.enter((ctx) => {
-		
+		editing = ''
 		return ctx.editMessageText(ctx.i18n.t('personalNumber'), {
 			parse_mode: "HTML",
 			...Markup.inlineKeyboard(personalNumberKeyboard(ctx)),
@@ -45,8 +46,8 @@ const numberScene = new Scenes.BaseScene("number")
 			],
 		});
 	})
-	.use((ctx) => {})
-	.leave((ctx)=>{})
+	.use((ctx) => { })
+	.leave((ctx) => { })
 
 async function fetch(ctx) {
 	return getUserData({
@@ -57,10 +58,12 @@ async function fetch(ctx) {
 		region_id: ctx.session.regionNumber,
 		sub_region_id: ctx.session.districtNumber,
 	})
-		.then((res) => {
+		.then(async(res) => {
 			const data = res.map((val) => `${val.name}: ${val.value}`).join("\n")
-			if(!Account.getOne(ctx.session.personalNumber)){
-				Account.create(
+			const checkAccount = await Account.getOne(ctx.session.personalNumber)
+			console.log('check -------',checkAccount)
+			if (checkAccount) {
+				await Account.create(
 					ctx.session.personalNumber,
 					data,
 					ctx.session.serviceId,
@@ -68,9 +71,13 @@ async function fetch(ctx) {
 					ctx.session.districtNumber,
 					ctx.session.user_id
 				)
+				await User.updateAuth(ctx.session.user_id)
+			} else {
+				ctx.reply(ctx.i18n.t('checkAccount'))
+				return ctx.scene.enter('number')
 			}
 			ctx.reply(data)
-			return ctx.scene.leave('number') 
+			return ctx.scene.leave('number')
 		})
 		.catch((err) => {
 			console.log(err);

@@ -6,6 +6,13 @@ const User = sequelize.define('user',{
         type:DataTypes.INTEGER,
         primaryKey: true
     },  
+    lang : {
+        type:DataTypes.STRING,
+    },
+    auth:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:false
+    }
 },
 {
     tableName:'users'
@@ -14,7 +21,8 @@ const User = sequelize.define('user',{
 const Accounts = sequelize.define('accounts',{
     id:{
         type:DataTypes.STRING,
-        primaryKey:true
+        primaryKey:true,
+        
     },
     data:{
         type:DataTypes.JSON
@@ -30,7 +38,7 @@ const Accounts = sequelize.define('accounts',{
     },
     userId:{
         type:DataTypes.INTEGER
-    }
+    },
 },{
     tableName:'accounts'
 })

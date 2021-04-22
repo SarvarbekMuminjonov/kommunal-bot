@@ -12,16 +12,35 @@ function create(id) {
             console.log(e)
         })
 }
+// function updateLang(id, lang) {
+//     User.update({
+//         lang: lang
+//     }, {
+//         where:{
+//             id:id
+//         }
+//     })
+// }
 
-function destroy(id){
-    User.destroy({where:id})
-    .then(() => {
-        console.log('deleted')
+function updateAuth(id) {
+    User.update({
+        auth: true
+    }, {
+        where:{
+            id:id
+        }
+    })
+}
 
-    })
-    .catch(e => {
-        console.log(e)
-    })
+function destroy(id) {
+    User.destroy({ where: id })
+        .then(() => {
+            console.log('deleted')
+
+        })
+        .catch(e => {
+            console.log(e)
+        })
 }
 
 function getOne(id) {
@@ -35,5 +54,7 @@ module.exports = {
     create,
     getAll,
     getOne,
-    destroy
+    destroy,
+    updateAuth,
+    // updateLang
 }

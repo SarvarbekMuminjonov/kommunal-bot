@@ -1,5 +1,5 @@
 const {Scenes, Markup,}=require('telegraf')
-
+const { User }=require('../database/controllers/main')
 const chooseText = `Assalomu alaykum tilni 
 tanlang.
 ---------
@@ -16,10 +16,10 @@ languageScene.enter((ctx)=>{
     // .then(msgInfo=>console.log(msgInfo))
 })
 
-languageScene.action(/.+/,ctx=>{
+languageScene.action(/.+/,async ctx=>{
     ctx.session.lang = ctx.match[0]
     ctx.i18n.locale(ctx.session.lang)
-    console.log(ctx.i18n.locale())
+    // await User.updateLang(ctx.session.user_id,ctx.session.lang)
     return ctx.scene.enter('services')
 })
 

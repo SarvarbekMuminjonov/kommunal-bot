@@ -6,6 +6,7 @@ const accountScene = new Scenes.BaseScene('account')
     .enter(async(ctx)=>{
     //    const accounts = await Account.getAll(ctx.session.user_id )
     //    console.log(accounts)
+        // console.log('ac',ctx.i18n.locale())
         let str = ctx.i18n.t('newAccount')
         let array =  await Account.getAll(ctx.session.user_id)
         let obj = getAccountsKeyboard(array,str)
@@ -35,7 +36,8 @@ const accountScene = new Scenes.BaseScene('account')
             })
                 .then((res) => {
                     // console.log(res)
-                    const data = res.map((val) => `${val.name}: ${val.value}`).join("\n")    
+                    const data = res.map((val) => `${val.name}: ${val.value}`).join("\n")
+                    Account.update(result.id,res)    
                     return  ctx.editMessageText(data,obj.keyboard)
                 })
                 .catch((err) => {

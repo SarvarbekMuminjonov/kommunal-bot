@@ -1,3 +1,5 @@
+const start = require('./app/database/index')
+start()
 main();
 
 function main() {

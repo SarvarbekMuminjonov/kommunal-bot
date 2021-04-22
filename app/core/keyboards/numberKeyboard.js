@@ -23,7 +23,7 @@ return [
 		Markup.button.callback("0", "0"),
 		Markup.button.callback(ctx.i18n.t('delete'), "delete"),
 	],
-	[Markup.button.callback(ctx.i18n.result, "natija")],
+	[Markup.button.callback(ctx.i18n.t('result'), "natija")],
 ]
 }
 
