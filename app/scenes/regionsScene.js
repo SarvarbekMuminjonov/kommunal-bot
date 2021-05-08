@@ -9,12 +9,12 @@ const regionScene = new Scenes.BaseScene("region")
 
 regionScene
 	.enter((ctx) => {
-		if (ctx.session.lang)
-			ctx.i18n.locale(ctx.session.lang)
+		if (ctx.session.user.lang)
+			ctx.i18n.locale(ctx.session.user.lang)
 		const array = getArray(ctx.session.serviceId)
-		console.log('reg', ctx.i18n.locale())
+		
 		ctx.editMessageText(ctx.i18n.t('region'), {
-			...buttonGenerator(array, ctx.session.lang, ctx.i18n.t('exit')),
+			...buttonGenerator(array, ctx.session.user.lang, ctx.i18n.t('exit')),
 		})
 	})
 

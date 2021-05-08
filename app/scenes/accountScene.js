@@ -1,13 +1,13 @@
-const { Scenes, Markup } = require('telegraf')
+const { Scenes } = require('telegraf')
 const { User, Account } = require('../database/controllers/main')
 const getAccountsKeyboard = require('../core/keyboards/accountsButton')
 const getUserData = require("../services/exemple")
 const accountScene = new Scenes.BaseScene('account')
     .enter(async (ctx) => {
-        const accounts = await Account.getAll(ctx.session.user_id )
+        // const accounts = await Account.getAll(ctx.session.user_id )
         //    console.log(accounts)
         const user = await User.getOne(ctx.from.id)
-		ctx.session.user = user.toJSON()
+        ctx.session.user = user.toJSON()
         ctx.i18n.locale(ctx.session.user.lang)
         let str = ctx.i18n.t('newAccount')
         let array = await Account.getAll(ctx.session.user_id)
@@ -26,7 +26,6 @@ const accountScene = new Scenes.BaseScene('account')
             // console.log('match', ctx.match[0])
             ctx.answerCbQuery()
             let array = await Account.getAll(ctx.session.user_id)
-            // ctx.i18n.locale("uz")
             let str = ctx.i18n.t('newAccount')
             let obj = getAccountsKeyboard(array, str)
             let data = await (Account.getOne(ctx.match[0]))
@@ -43,7 +42,10 @@ const accountScene = new Scenes.BaseScene('account')
                     // console.log(res)
                     const data = res.map((val) => `${val.name}: ${val.value}`).join("\n")
                     Account.update(result.id, data)
-                    return ctx.editMessageText(data, obj.keyboard)
+                    return ctx.editMessageText(
+                        result.updatedAt.toString().slice(0,24)+'\n'+data,
+                        obj.keyboard
+                    )
                 })
                 .catch((err) => {
                     console.log(err);
@@ -53,7 +55,7 @@ const accountScene = new Scenes.BaseScene('account')
                 })
         }
     })
-    .on('message',(ctx)=>{
+    .on('message', (ctx) => {
         ctx.deleteMessage()
         return ctx.scene.enter('account')
     })

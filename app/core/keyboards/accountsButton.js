@@ -23,10 +23,11 @@ function getAccountsKeyboard(accounts,str) {
 		}
 	}
 	//btn.push(Markup.button.callback('Akkount qo\'shish','new'))
+	//Sat May 08 2021 15:53:06 
 	// if(lang =='ru')btn.push([Markup.button.callback('Назад','orqaga')])
 	// else btn.push([Markup.button.callback("Ortga qaytish", "orqaga")]);
 	return {
-		'data':JSON.parse(JSON.stringify(accounts[0].data)),
+		'data':JSON.parse(JSON.stringify(accounts[0].updatedAt.toString().slice(0,24)+'\n'+accounts[0].data)),
 		'keyboard':Markup.inlineKeyboard(btn)
 	}
 }

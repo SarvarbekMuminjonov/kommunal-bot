@@ -13,7 +13,7 @@ const districtScene = new Scenes.BaseScene("district")
 		ctx.editMessageText(ctx.i18n.t('subregion'), {
 			...buttonGenerator(
 				array[ctx.session.regIndex].Children.Area,
-				ctx.session.lang,
+				ctx.session.user.lang,
 				ctx.i18n.t('exit')
 			),
 		});
