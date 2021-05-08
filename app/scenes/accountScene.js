@@ -18,7 +18,7 @@ const accountScene = new Scenes.BaseScene('account')
     })
     .action(/.+/, async ctx => {
         const user = await User.getOne(ctx.from.id)
-        ctx.i18n.locale(user.lang)
+        ctx.i18n.locale(ctx.session.user.lang)
         if (ctx.match[0] == 'new') {
             ctx.answerCbQuery()
             return ctx.scene.enter('services')
