@@ -46,22 +46,23 @@ const numberScene = new Scenes.BaseScene("number")
 			],
 		});
 	})
-	.use((ctx) => { })
-	.leave((ctx) => { })
+	.on('message', (ctx) => {
+		ctx.deleteMessage()
+		return ctx.scene.enter('number')
+	})
 
 async function fetch(ctx) {
 	return getUserData({
-		lang: ctx.session.lang,
+		lang: ctx.session.user.lang,
 		id: ctx.session.serviceId,
 		personal_account: ctx.session.personalNumber,
 		service_id: ctx.session.serviceId,
 		region_id: ctx.session.regionNumber,
 		sub_region_id: ctx.session.districtNumber,
 	})
-		.then(async(res) => {
+		.then(async (res) => {
 			const data = res.map((val) => `${val.name}: ${val.value}`).join("\n")
 			const checkAccount = await Account.getOne(ctx.session.personalNumber)
-			console.log('check -------',checkAccount)
 			if (checkAccount) {
 				await Account.create(
 					ctx.session.personalNumber,
@@ -73,8 +74,7 @@ async function fetch(ctx) {
 				)
 				await User.updateAuth(ctx.session.user_id)
 			} else {
-				ctx.reply(ctx.i18n.t('checkAccount'))
-				return ctx.scene.enter('number')
+				return ctx.reply(ctx.i18n.t('error'))
 			}
 			ctx.reply(data)
 			return ctx.scene.leave('number')

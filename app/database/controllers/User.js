@@ -12,22 +12,22 @@ function create(id) {
             console.log(e)
         })
 }
-// function updateLang(id, lang) {
-//     User.update({
-//         lang: lang
-//     }, {
-//         where:{
-//             id:id
-//         }
-//     })
-// }
+function updateLang(id, lang) {
+    User.update({
+        lang: lang
+    }, {
+        where: {
+            id: id
+        }
+    })
+}
 
 function updateAuth(id) {
     User.update({
         auth: true
     }, {
-        where:{
-            id:id
+        where: {
+            id: id
         }
     })
 }
@@ -56,5 +56,5 @@ module.exports = {
     getOne,
     destroy,
     updateAuth,
-    // updateLang
+    updateLang
 }

@@ -1,33 +1,38 @@
-const {Scenes,Markup} = require('telegraf')
-const {User , Account} = require('../database/controllers/main')
+const { Scenes, Markup } = require('telegraf')
+const { User, Account } = require('../database/controllers/main')
 const getAccountsKeyboard = require('../core/keyboards/accountsButton')
 const getUserData = require("../services/exemple")
 const accountScene = new Scenes.BaseScene('account')
-    .enter(async(ctx)=>{
-    //    const accounts = await Account.getAll(ctx.session.user_id )
-    //    console.log(accounts)
-        // console.log('ac',ctx.i18n.locale())
+    .enter(async (ctx) => {
+        const accounts = await Account.getAll(ctx.session.user_id )
+        //    console.log(accounts)
+        const user = await User.getOne(ctx.from.id)
+		ctx.session.user = user.toJSON()
+        ctx.i18n.locale(user.lang)
         let str = ctx.i18n.t('newAccount')
-        let array =  await Account.getAll(ctx.session.user_id)
-        let obj = getAccountsKeyboard(array,str)
-        ctx.reply( obj.data || ctx.i18n.t('notFound'),obj.keyboard)
+        let array = await Account.getAll(ctx.session.user_id)
+        let obj = getAccountsKeyboard(array, str)
+        ctx.reply(obj.data || ctx.i18n.t('notFound'), obj.keyboard)
         return ctx.scene.leave('account')
-    //    return ctx.reply(accounts)
+        //    return ctx.reply(accounts)
     })
-    .action(/.+/,async ctx=>{
-        if(ctx.match[0]== 'new'){
+    .action(/.+/, async ctx => {
+        const user = await User.getOne(ctx.from.id)
+        ctx.i18n.locale(user.lang)
+        if (ctx.match[0] == 'new') {
             ctx.answerCbQuery()
-            return ctx.scene.enter('lang')
+            return ctx.scene.enter('services')
         } else {
-            console.log('match',ctx.match[0])
+            // console.log('match', ctx.match[0])
             ctx.answerCbQuery()
-            let array =  await Account.getAll(ctx.session.user_id)
+            let array = await Account.getAll(ctx.session.user_id)
+            // ctx.i18n.locale("uz")
             let str = ctx.i18n.t('newAccount')
-            let obj = getAccountsKeyboard(array,str)
+            let obj = getAccountsKeyboard(array, str)
             let data = await (Account.getOne(ctx.match[0]))
-            let result = JSON.parse (JSON.stringify(data[0]))
+            let result = JSON.parse(JSON.stringify(data[0]))
             return getUserData({
-                lang: ctx.i18n.locale(),
+                lang: ctx.session.user.lang,
                 id: result.serviceId,
                 personal_account: result.id,
                 service_id: result.serviceId,
@@ -37,8 +42,8 @@ const accountScene = new Scenes.BaseScene('account')
                 .then((res) => {
                     // console.log(res)
                     const data = res.map((val) => `${val.name}: ${val.value}`).join("\n")
-                    Account.update(result.id,res)    
-                    return  ctx.editMessageText(data,obj.keyboard)
+                    Account.update(result.id, data)
+                    return ctx.editMessageText(data, obj.keyboard)
                 })
                 .catch((err) => {
                     console.log(err);
@@ -48,6 +53,10 @@ const accountScene = new Scenes.BaseScene('account')
                 })
         }
     })
-    
+    .on('message',(ctx)=>{
+        ctx.deleteMessage()
+        return ctx.scene.enter('account')
+    })
+
 
 module.exports = accountScene

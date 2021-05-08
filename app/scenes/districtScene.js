@@ -28,6 +28,10 @@ const districtScene = new Scenes.BaseScene("district")
 			ctx.answerCbQuery("ok");
 			return ctx.scene.enter("number");
 		}
-	});
+	})
+	.on('message', (ctx) => {
+		ctx.deleteMessage()
+		return ctx.scene.enter('district')
+	})
 
 module.exports = districtScene;

@@ -1,26 +1,28 @@
 const db = require('../models/model')
 const Account = db.Accounts
 
-function create(id,data,serviceId,regionId,subregionId,userId){
-    Account.create({id,data,serviceId,regionId,subregionId,userId})
-    .then((res)=>console.log('Account created',res))
-    .catch(e=>console.log(e))
+function create(id, data, serviceId, regionId, subregionId, userId) {
+    Account.create({ id, data, serviceId, regionId, subregionId, userId })
+        .then((res) => console.log('Account created', res))
+        .catch(e => console.log(e))
 }
-function update(id,{data}){
-    Account.update({data},
-        {where:id}
+async function update(id, data) {
+    await Account.update({ data: data },
+        {
+            where: {
+                id: id
+            }
+        }
     )
-    .then((res)=>console.log('Account created'))
-    .catch(e=>console.log(e))
 }
-function getAll(userId){
+function getAll(userId) {
     return Account.findAll({
-        where:userId
+        where: userId
     })
-    
+
 }
-function getOne(id){
-    return Account.findAll({id})
+function getOne(id) {
+    return Account.findAll({ id })
 }
 
 module.exports = {
